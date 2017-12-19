@@ -36003,15 +36003,19 @@ N	float ts =100*1000;
 N
 N//	float VAL_[3];
 N//	assert(_VAL);
-N	if(_VAL != 0)
-N	{
-N		kT = k*_VAL ;
-N		v_flow = ts/(kT) ;
-N		flow += v_flow ;
-N		return flow ;
-N	}
+N	if(show_Refresh)
+N		{
+N			if(_VAL != 0)
+N			{
+N				kT = k*_VAL ;
+N				v_flow = ts/(kT) ;
+N				flow += v_flow ;
+N				return flow ;
+N			}
+N		}
 N	else
 N	return flow ;
+W "..\component\LED\led.c" 70 1 missing return statement at end of non-void function "Flow_"
 N}
 N /********************************************************/
 Nvoid LED_task(void * pvParameters)
@@ -36026,7 +36030,6 @@ N		LED0=1;
 X		*((volatile unsigned long *)((((((((uint32_t)0x40000000) + 0x10000) + 0x0C00)+12) & 0xF0000000)+0x2000000+(((((((uint32_t)0x40000000) + 0x10000) + 0x0C00)+12) &0xFFFFF)<<5)+(11<<2))))=1;
 N		
 N		vTaskDelay(500);if(i == 50){i = 0 ;}
-N		{TIM3_PWM_Init(i*100-1,72-1);;}	
 N//		a = TIM_GetCapture3(TIM3);
 N//		printf("pwm%d\r\n",a);
 N		printf("PWM:%e L\r\n",Flow_());

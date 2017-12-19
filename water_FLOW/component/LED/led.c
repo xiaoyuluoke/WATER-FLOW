@@ -55,13 +55,16 @@ float Flow_(void)
 
 //	float VAL_[3];
 //	assert(_VAL);
-	if(_VAL != 0)
-	{
-		kT = k*_VAL ;
-		v_flow = ts/(kT) ;
-		flow += v_flow ;
-		return flow ;
-	}
+	if(show_Refresh)
+		{
+			if(_VAL != 0)
+			{
+				kT = k*_VAL ;
+				v_flow = ts/(kT) ;
+				flow += v_flow ;
+				return flow ;
+			}
+		}
 	else
 	return flow ;
 }
@@ -76,7 +79,6 @@ void LED_task(void * pvParameters)
 		LED0=1;
 		
 		vTaskDelay(500);if(i == 50){i = 0 ;}
-		{TIM3_PWM_Init(i*100-1,72-1);;}	
 //		a = TIM_GetCapture3(TIM3);
 //		printf("pwm%d\r\n",a);
 		printf("PWM:%e L\r\n",Flow_());
